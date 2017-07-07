@@ -1,5 +1,5 @@
 ## Travis CI Build
-[![Build Status](https://https://github.com/mabrod/spring-security-demo.svg?branch=master)](https://github.com/mabrod/spring-security-demo)
+[![Build Status](https://travis-ci.org/mabrod/spring-security-demo.svg?branch=master)](https://travis-ci.org/mabrod/spring-security-demo)
 
 ## Learning Spring Security
 
