@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header :: head"></div>
+<body>
+<div class="container">
+    <div>
+        <h4><a th:href="@{/protected/superuser}">Super User only resources</a></h4>
+        <h4><a th:href="@{/protected/admin}">Admin only resources</a></h4>
+        <h4><a th:href="@{/normal}">Resources not protected by any role</a></h4>
+    </div>
+</div>
+<div th:replace="common/footer :: footer"></div>
+</div>
+</body>
+</html>

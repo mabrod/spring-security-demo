@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<div th:fragment="info">
+    <div class="container">
+        <hr/>
+        <div sec:authorize="isAuthenticated()">
+            <h3>Welcome <span th:text="${userDetails.username}"/></h3>
+            <h4>Roles:</h4>
+            <div th:each="role : ${userDetails.roles}">
+                <li><span th:text="${role.name}"/></li>
+            </div>
+            <h4>Privileges:</h4>
+             <div th:each="rolePrivilege : ${userDetails.roles}">
+               <div th:each="privilege : ${rolePrivilege.privileges}">
+                <li><span th:text="${privilege.name}"/></li>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

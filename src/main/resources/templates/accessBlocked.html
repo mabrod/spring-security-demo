@@ -1,0 +1,14 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<div th:include="common/header :: head" th:remove="tag"></div>
+<body>
+<div class="container">
+    <div class="alert alert-danger">
+        <span th:text="#{login.access.blocked}"/>
+    </div>
+</div>
+
+<div th:include="common/footer :: footer"></div>
+</body>
+</html>
