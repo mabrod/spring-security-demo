@@ -3,6 +3,8 @@ package com.brodma.web.security.domain.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -42,5 +44,30 @@ public class Privilege implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return Optional.ofNullable(o)
+                .filter(that -> that instanceof Privilege)
+                .map(that -> (Privilege)that)
+                .filter(that -> Objects.equals(this.name, that.name))
+                .filter(that -> Objects.equals(this.roles, that.roles))
+                .isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, roles);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Privilege{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name);
+        sb.append(", roles=").append(roles);
+        sb.append('}');
+        return sb.toString();
     }
 }

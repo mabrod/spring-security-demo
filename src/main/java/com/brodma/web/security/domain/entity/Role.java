@@ -3,6 +3,8 @@ package com.brodma.web.security.domain.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -60,5 +62,32 @@ public class Role implements Serializable {
     public void removeRole(Privilege privilege) {
         privileges.remove(privilege);
         privilege.getRoles().remove(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return Optional.ofNullable(o)
+                .filter(that -> that instanceof Role)
+                .map(that -> (Role)that)
+                .filter(that -> Objects.equals(this.name, that.name))
+                .filter(that -> Objects.equals(this.users, that.users))
+                .filter(that -> Objects.equals(this.privileges, that.privileges))
+                .isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, users, privileges);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Role{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name);
+        sb.append(", users=").append(users);
+        sb.append(", privileges=").append(privileges);
+        sb.append('}');
+        return sb.toString();
     }
 }

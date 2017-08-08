@@ -3,6 +3,8 @@ package com.brodma.web.security.domain.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -88,6 +90,39 @@ public class LoginUser implements Serializable {
     public void removeRole(Role role) {
         roles.remove(role);
         role.getUsers().remove(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+       return Optional.ofNullable(o)
+               .filter(that -> that instanceof LoginUser)
+               .map(that -> (LoginUser)that)
+               .filter(that -> Objects.equals(this.userName, that.userName))
+               .filter(that -> Objects.equals(this.password, that.password))
+               .filter(that -> Objects.equals(this.active, that.active))
+               .filter(that -> Objects.equals(this.expired, that.expired))
+               .filter(that -> Objects.equals(this.locked, that.locked))
+               .filter(that -> Objects.equals(this.roles, that.roles))
+               .isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, password, active, expired, locked, roles);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("LoginUser{");
+        sb.append("id=").append(id);
+        sb.append(", userName='").append(userName);
+        sb.append(", password='").append(password);
+        sb.append(", active=").append(active);
+        sb.append(", expired=").append(expired);
+        sb.append(", locked=").append(locked);
+        sb.append(", roles=").append(roles);
+        sb.append('}');
+        return sb.toString();
     }
 }
 
